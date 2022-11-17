@@ -6,5 +6,5 @@ public interface ImodoReproductor {
 
     public void CambiarCancion();
 
-    public void EscucharCancion();
+    public void EscucharCancion();///////
 }
