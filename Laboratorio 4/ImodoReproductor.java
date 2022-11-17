@@ -1,10 +1,18 @@
+import java.util.ArrayList;
+
 /**
  * ImodoReproductor
  */
 public interface ImodoReproductor {
-    public void SeleccionarLista();
+    /**
+     * Muestra las distintas listas de reproducción existentes y registradas
+     * Permite seleccionar una de ellas al usuario.
+     * 
+     * @param listas
+     */
+    public void SeleccionarLista(ArrayList<String> listas);
 
-    public void CambiarCancion();
+    public void CambiarCancion(ArrayList<Cancion> canciones);
 
-    public void EscucharCancion();///////
+    public void EscucharCancion(ArrayList<Cancion> canciones);///////
 }

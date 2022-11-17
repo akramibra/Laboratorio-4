@@ -72,9 +72,19 @@ public class Controller {
     public static void modoReproduccion() {
         int opcion = 0;
         int selection = 1;
-        while (opcion != selection){
+
+        while (opcion != selection) {
             opcion = view.menuReproduccion();
             selection = view.notAnOption(opcion);
+            switch (selection) {
+                case 1: // Seleccionar lista
+
+                case 2: // Cambiar canción
+                    break;
+                case 3: // Elegir canción
+                    break;
+
+            }
         }
 
     }

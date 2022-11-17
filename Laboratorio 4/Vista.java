@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 public class Vista {
@@ -81,4 +83,42 @@ public class Vista {
         }
         return menuReproduccion.length;
     }
+
+    /**
+     * Imprime todas las canciones que se encuentran en la lista especificada
+     * 
+     * @param canciones lista de todas las canciones registradas
+     * @param lista     el número de lista de reproducción en la cual se desea ver
+     *                  canciones
+     */
+    public ArrayList<Cancion> mostrarCanciones(ArrayList<Cancion> canciones, int lista, String NombreLista) {
+        ArrayList<Cancion> temp = new ArrayList<Cancion>();
+        int i = 1;
+
+        System.out.println("\n***Selecciona una de las canciones de la lista***");
+        System.out.println("Actualmente estas viendo la lista: '" + NombreLista + "'\n");
+        for (Cancion cancion : canciones) {
+            if (cancion.getEnlista() == lista) {
+                System.out.println("Canción " + i);
+                System.out.println(cancion + "\n");
+                temp.add(cancion);
+                i++;
+            }
+        }
+
+        return temp;
+    }
+
+    public int mostrarListas(ArrayList<String> listas) {
+        for (String string : listas) {
+            System.out.println(string);
+        }
+
+        return listas.size();
+    }
+
+    public void Mostrar(String texto) {
+        System.out.println(texto);
+    }
+
 }

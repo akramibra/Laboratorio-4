@@ -2,49 +2,64 @@
  * Cancion
  */
 public class Cancion {
-    private static String nombre;
-    private static String duracion;
-    private static String autor;
-    private static String genero;
+    private String nombre;
+    private String duracion;
+    private String autor;
+    private String genero;
+    private int enlista;
 
-    public Cancion(String Nombre, String Duracion, String Autor, String Genero) {
-        nombre = Nombre;
-        duracion = Duracion;
-        autor = Autor;
-        genero = Genero;
-
+    public Cancion(String nombre, String duracion, String autor, String genero, int enlista) {
+        this.nombre = nombre;
+        this.duracion = duracion;
+        this.autor = autor;
+        this.genero = genero;
+        this.enlista = enlista;
     }
 
-    public static String getNombre() {
+    @Override
+    public String toString() {
+        return "Nombre: " + nombre + "\nAutor: " + autor + "\nGenero: " + genero + "\nDuración: " + duracion
+                + " minutos.";
+    }
+
+    public String getNombre() {
         return nombre;
     }
 
-    public static void setNombre(String nombre) {
-        Cancion.nombre = nombre;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public static String getDuracion() {
+    public String getDuracion() {
         return duracion;
     }
 
-    public static void setDuracion(String duracion) {
-        Cancion.duracion = duracion;
+    public void setDuracion(String duracion) {
+        this.duracion = duracion;
     }
 
-    public static String getAutor() {
+    public String getAutor() {
         return autor;
     }
 
-    public static void setAutor(String autor) {
-        Cancion.autor = autor;
+    public void setAutor(String autor) {
+        this.autor = autor;
     }
 
-    public static String getGenero() {
+    public String getGenero() {
         return genero;
     }
 
-    public static void setGenero(String genero) {
-        Cancion.genero = genero;
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public int getEnlista() {
+        return enlista;
+    }
+
+    public void setEnlista(int enlista) {
+        this.enlista = enlista;
     }
 
 }
