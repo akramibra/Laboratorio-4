@@ -1,6 +1,5 @@
 
 public class Controller {
-    private boolean NumberFormatException = false;
     private Vista view = new Vista();
     private Radio radio = new Radio();
 
@@ -15,7 +14,7 @@ public class Controller {
                     Start();
                     break;
                 case 2:
-                    System.out.println("No se logro encender la radio, muchas gracias por utilizar nuestro programa");
+                    view.Mostrar("No se logro encender la radio, muchas gracias por utilizar nuestro programa");
                     break;
             }
         }
@@ -56,41 +55,13 @@ public class Controller {
             selection = view.notAnOption(opcion);
             switch (selection) {
                 case 1:
-                    opcion = view.modoRadio();
-                    selection = view.notAnOption(opcion);
-                    if (selection == 1) {
-                        radio.setModoemisora("FM");
-                        System.out.println("Se ha cambiado exitosamente la emisora a FM");
-                    } else if (selection == 2) {
-                        radio.setModoemisora("AM");
-                        view.Mostrar("Se ha cambiado exitosamente la emisoar a AM");
-                    }
-
+                    radio.CambiarTipo();
                     break;
                 case 2:
-                    int option = view.SolicitudInt("1. Para adelante \n2. Para Atras");
-                    if (option == 1) {
-                        float iEmisora = radio.getiEmisora() + (float) 0.5;
-                        radio.setiEmisora(iEmisora);
-                        System.out.println("Usted esta actualmente en la emisora " + iEmisora);
-
-                    } else if (option == 2) {
-                        float iEmisora = radio.getiEmisora() - (float) 0.5;
-                        radio.setiEmisora(iEmisora);
-                        System.out.println("Usted esta actualmente en la emisora " + iEmisora);
-                    }
+                    radio.CambiarEmisora();
                     break;
                 case 3:
-                    float gEmisoria = view.SolicitudFloat("Que emisora desea guardar");
-                    if (gEmisoria > 0) {
-                        radio.getEmisorasG().add(gEmisoria);
-                        System.out.println(radio.getEmisorasG());
-                    } else if (gEmisoria < 0) {
-                        System.out.println("No se pueden numeros negativos");
-                    } else if (NumberFormatException == true) {
-                        System.out.println("Ingrese un numero porfavor");
-                    }
-
+                    radio.GuardarEmisora();
                     break;
                 case 4:
 

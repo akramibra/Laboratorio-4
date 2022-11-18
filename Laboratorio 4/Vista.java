@@ -182,4 +182,10 @@ public class Vista {
     public void mostrarCanciones(Cancion cancion) {
         System.out.println(cancion);
     }
+
+    public void imprimirFloats(ArrayList<Float> num) {
+        for (Float float1 : num) {
+            System.out.println(float1);
+        }
+    }
 }

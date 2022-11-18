@@ -183,20 +183,58 @@ public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono, Imodo
     // MODO RADIO
     @Override
     public void CambiarTipo() {
-        // TODO Auto-generated method stub
-
+        int opcion = 0;
+        int selection = 1;
+        while (opcion != selection) {
+            opcion = view.modoRadio();
+            selection = view.notAnOption(opcion);
+            if (selection == 1) {
+                setModoemisora("FM");
+                view.Mostrar("Se ha cambiado exitosamente la emisora a FM");
+            } else if (selection == 2) {
+                setModoemisora("AM");
+                view.Mostrar("Se ha cambiado exitosamente la emisoar a AM");
+            }
+        }
     }
 
     @Override
     public void CambiarEmisora() {
-        // TODO Auto-generated method stub
+        int opcion = 0;
+        int selection = 1;
+        while (opcion != selection) {
+            int option = view.SolicitudInt("1. Para adelante \n2. Para Atras");
+            if (option == 1) {
+                float iEmisora = getiEmisora() + (float) 0.5;
+                setiEmisora(iEmisora);
+                view.Mostrar("Usted esta actualmente en la emisora " + iEmisora);
+
+            } else if (option == 2) {
+                float iEmisora = getiEmisora() - (float) 0.5;
+                setiEmisora(iEmisora);
+                view.Mostrar("Usted esta actualmente en la emisora " + iEmisora);
+            }
+        }
 
     }
 
     @Override
     public void GuardarEmisora() {
-        // TODO Auto-generated method stub
+        int opcion = 0;
+        int selection = 1;
+        while (opcion != selection) {
+            float gEmisoria = view.SolicitudFloat("Que emisora desea guardar");
+            boolean NumberFormatException = false;
+            if (gEmisoria > 0) {
+                getEmisorasG().add(gEmisoria);
+                view.imprimirFloats(getEmisorasG());
+            } else if (gEmisoria < 0) {
+                view.Mostrar("No se pueden numeros negativos");
+            } else if (NumberFormatException == true) {
+                view.Mostrar("Ingrese un numero porfavor");
+            }
 
+        }
     }
 
     @Override
