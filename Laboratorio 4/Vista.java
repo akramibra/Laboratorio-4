@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
 
 public class Vista {
@@ -178,5 +177,9 @@ public class Vista {
     public float SolicitudFloat(String texto) {
         float resp = Float.parseFloat(JOptionPane.showInputDialog(null, texto));
         return resp;
+    }
+
+    public void mostrarCanciones(Cancion cancion) {
+        System.out.println(cancion);
     }
 }

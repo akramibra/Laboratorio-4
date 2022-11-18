@@ -5,29 +5,21 @@
 import java.util.ArrayList;
 
 public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono, ImodoProductividad {
-    private static boolean encendido;
-    private static int volumen;
-    private static int modo;
-    private static String modoemisora;
-    private static Float emisoraA;
-    private static ArrayList<Float> EmisorasG;
-    private static ArrayList<Cancion> ListaR;
-    private static ArrayList<String> Contactos;
-    private static String LastContact;
+    private boolean encendido;
+    private int volumen;
+    private int modo;
+    private String modoemisora;
+    private Float emisoraA;
+    private ArrayList<Float> EmisorasG;
+    private ArrayList<Cancion> ListaR;
+    private ArrayList<String> Contactos;
+    private String LastContact;
     private ArrayList<String> listas_de_Reproduccion;
-    private static boolean telconectado;
-    private static boolean llamadaactive;
-    private static float iEmisora;
-
-    public static float getiEmisora() {
-        return iEmisora;
-    }
-
-    public static void setiEmisora(float iEmisora) {
-        Radio.iEmisora = iEmisora;
-    }
-
-    Vista view = new Vista();
+    private boolean telconectado;
+    private boolean llamadaactive;
+    private float iEmisora;
+    private ArrayList<String> tarjetasPresentacion;
+    private Vista view = new Vista();
 
     Radio() {
         iEmisora = (float) 90.0;
@@ -42,6 +34,7 @@ public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono, Imodo
         crearContacts();
         crearListas();
         telconectado = false;
+        tarjetasPresentacion = new ArrayList<String>();
     }
 
     public void crearCanciones() {
@@ -74,100 +67,10 @@ public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono, Imodo
         listas_de_Reproduccion.add("Oldies");
     }
 
-    public static boolean isEncendido() {
-        return encendido;
-    }
-
-    public static void setEncendido(boolean encendido) {
-        Radio.encendido = encendido;
-    }
-
-    public static int getVolumen() {
-        return volumen;
-    }
-
-    public static void setVolumen(int volumen) {
-        Radio.volumen = volumen;
-    }
-
-    public static int getModo() {
-        return modo;
-    }
-
-    public static void setModo(int modo) {
-        Radio.modo = modo;
-    }
-
-    public static String getModoemisora() {
-        return modoemisora;
-    }
-
-    public void setModoemisora(String modoemisora) {
-        Radio.modoemisora = modoemisora;
-    }
-
-    public static Float getEmisoraA() {
-        return emisoraA;
-    }
-
-    public static void setEmisoraA(Float emisoraA) {
-        Radio.emisoraA = emisoraA;
-    }
-
-    public static ArrayList<Float> getEmisorasG() {
-        return EmisorasG;
-    }
-
-    public static void setEmisorasG(ArrayList<Float> emisorasG) {
-        EmisorasG = emisorasG;
-    }
-
-    public static ArrayList<Cancion> getListaR() {
-        return ListaR;
-    }
-
-    public static void setListaR(ArrayList<Cancion> listaR) {
-        ListaR = listaR;
-    }
-
-    public static ArrayList<String> getContactos() {
-        return Contactos;
-    }
-
-    public static void setContactos(ArrayList<String> contactos) {
-        Contactos = contactos;
-    }
-
-    public static String getLastContact() {
-        return LastContact;
-    }
-
-    public static void setLastContact(String lastContact) {
-        LastContact = lastContact;
-    }
-
-    public ArrayList<String> getListas_de_Reproduccion() {
-        return listas_de_Reproduccion;
-    }
-
-    public void setListas_de_Reproduccion(ArrayList<String> listas_de_Reproduccion) {
-        this.listas_de_Reproduccion = listas_de_Reproduccion;
-    }
-
-    public static boolean isTelconectado() {
-        return telconectado;
-    }
-
-    public static void setTelconectado(boolean telconectado) {
-        Radio.telconectado = telconectado;
-    }
-
-    public static boolean isLlamadaactive() {
-        return llamadaactive;
-    }
-
-    public static void setLlamadaactive(boolean llamadaactive) {
-        Radio.llamadaactive = llamadaactive;
+    public void crearTarjetas() {
+        tarjetasPresentacion.add("\tFabiola Contreras\ntel:22308599\temail:con22787@uvg.edu.gt");
+        tarjetasPresentacion.add("\tDiego Duarte\ntel:22678430\temail:dua22075@uvg.edu.gt");
+        tarjetasPresentacion.add("\tAkram Ibrahim\ntel:25981045\temail:ibr211645@uvg.edu.gt");
     }
 
     // MODO TELEFONO
@@ -241,7 +144,7 @@ public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono, Imodo
             System.out.println("No hay canciones en la lista");
         } else {
             for (int j = 0; j < canciones.size(); j++) {
-                System.out.println(canciones.get(j));
+                view.mostrarCanciones(canciones.get(j));
 
                 while (opcion != selection) {
                     view.Mostrar("anterior 1, siguiente 2");
@@ -251,8 +154,9 @@ public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono, Imodo
                 if (selection == 1) {
                     if (j != 0) {
                         j -= 2;
+                        view.mostrarCanciones(canciones.get(j));
                     } else {
-                        System.out.println("esa es la primera canción en lista");
+                        view.Mostrar("esa es la primera canción en lista");
                     }
                 }
             }
@@ -272,7 +176,6 @@ public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono, Imodo
             enLista = view.mostrarCanciones(canciones, lista_seleccionada, lista);
             opcion = enLista.size();
             selection = view.notAnOption(opcion);
-            System.out.println("hey");
         }
 
     }
@@ -305,6 +208,126 @@ public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono, Imodo
     // MODO PRODUCTIVIDAD
     @Override
     public void verTarjetas(ArrayList<String> tarjetas) {
+        view.Mostrar("\n***Se muestran las tarjetas guardadas***\n");
+        for (String tarjeta : tarjetas) {
+            view.Mostrar(tarjeta + "\n");
+        }
+    }
 
+    /**
+     * 
+     * Getters y setters para cada una de las variables disponibles
+     * 
+     */
+    public boolean isEncendido() {
+        return encendido;
+    }
+
+    public void setEncendido(boolean encendido) {
+        this.encendido = encendido;
+    }
+
+    public int getVolumen() {
+        return volumen;
+    }
+
+    public void setVolumen(int volumen) {
+        this.volumen = volumen;
+    }
+
+    public int getModo() {
+        return modo;
+    }
+
+    public void setModo(int modo) {
+        this.modo = modo;
+    }
+
+    public String getModoemisora() {
+        return modoemisora;
+    }
+
+    public void setModoemisora(String modoemisora) {
+        this.modoemisora = modoemisora;
+    }
+
+    public Float getEmisoraA() {
+        return emisoraA;
+    }
+
+    public void setEmisoraA(Float emisoraA) {
+        this.emisoraA = emisoraA;
+    }
+
+    public ArrayList<Float> getEmisorasG() {
+        return EmisorasG;
+    }
+
+    public void setEmisorasG(ArrayList<Float> emisorasG) {
+        EmisorasG = emisorasG;
+    }
+
+    public ArrayList<Cancion> getListaR() {
+        return ListaR;
+    }
+
+    public void setListaR(ArrayList<Cancion> listaR) {
+        ListaR = listaR;
+    }
+
+    public ArrayList<String> getContactos() {
+        return Contactos;
+    }
+
+    public void setContactos(ArrayList<String> contactos) {
+        Contactos = contactos;
+    }
+
+    public String getLastContact() {
+        return LastContact;
+    }
+
+    public void setLastContact(String lastContact) {
+        LastContact = lastContact;
+    }
+
+    public ArrayList<String> getListas_de_Reproduccion() {
+        return listas_de_Reproduccion;
+    }
+
+    public void setListas_de_Reproduccion(ArrayList<String> listas_de_Reproduccion) {
+        this.listas_de_Reproduccion = listas_de_Reproduccion;
+    }
+
+    public boolean isTelconectado() {
+        return telconectado;
+    }
+
+    public void setTelconectado(boolean telconectado) {
+        this.telconectado = telconectado;
+    }
+
+    public boolean isLlamadaactive() {
+        return llamadaactive;
+    }
+
+    public void setLlamadaactive(boolean llamadaactive) {
+        this.llamadaactive = llamadaactive;
+    }
+
+    public ArrayList<String> getTarjetasPresentacion() {
+        return tarjetasPresentacion;
+    }
+
+    public void setTarjetasPresentacion(ArrayList<String> tarjetasPresentacion) {
+        this.tarjetasPresentacion = tarjetasPresentacion;
+    }
+
+    public float getiEmisora() {
+        return iEmisora;
+    }
+
+    public void setiEmisora(float iEmisora) {
+        this.iEmisora = iEmisora;
     }
 }

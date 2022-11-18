@@ -1,10 +1,10 @@
 
 public class Controller {
-    private static boolean NumberFormatException = false;
-    private static Vista view = new Vista();
-    private static Radio radio = new Radio();
+    private boolean NumberFormatException = false;
+    private Vista view = new Vista();
+    private Radio radio = new Radio();
 
-    public static void startRadio() {
+    public void startRadio() {
         int opcion = 0;
         int selection = 1;
         while (opcion != selection) {
@@ -21,7 +21,7 @@ public class Controller {
         }
     }
 
-    public static void Start() {
+    public void Start() {
         int opcion = 0;
         int selection = 1;
         while (opcion != selection) {
@@ -48,7 +48,7 @@ public class Controller {
         }
     }
 
-    public static void modoRadio() {
+    public void modoRadio() {
         int opcion = 0;
         int selection = 1;
         while (opcion != selection) {
@@ -70,21 +70,21 @@ public class Controller {
                 case 2:
                     int option = view.SolicitudInt("1. Para adelante \n2. Para Atras");
                     if (option == 1) {
-                        float iEmisora = Radio.getiEmisora() + (float) 0.5;
-                        Radio.setiEmisora(iEmisora);
+                        float iEmisora = radio.getiEmisora() + (float) 0.5;
+                        radio.setiEmisora(iEmisora);
                         System.out.println("Usted esta actualmente en la emisora " + iEmisora);
 
                     } else if (option == 2) {
-                        float iEmisora = Radio.getiEmisora() - (float) 0.5;
-                        Radio.setiEmisora(iEmisora);
+                        float iEmisora = radio.getiEmisora() - (float) 0.5;
+                        radio.setiEmisora(iEmisora);
                         System.out.println("Usted esta actualmente en la emisora " + iEmisora);
                     }
                     break;
                 case 3:
                     float gEmisoria = view.SolicitudFloat("Que emisora desea guardar");
                     if (gEmisoria > 0) {
-                        Radio.getEmisorasG().add(gEmisoria);
-                        System.out.println(Radio.getEmisorasG());
+                        radio.getEmisorasG().add(gEmisoria);
+                        System.out.println(radio.getEmisorasG());
                     } else if (gEmisoria < 0) {
                         System.out.println("No se pueden numeros negativos");
                     } else if (NumberFormatException == true) {
@@ -100,7 +100,7 @@ public class Controller {
 
     }
 
-    public static void modoReproduccion() {
+    public void modoReproduccion() {
         int opcion = 0;
         int selection = 1;
 
@@ -112,10 +112,10 @@ public class Controller {
                     radio.SeleccionarLista(radio.getListas_de_Reproduccion());
                     break;
                 case 2: // Cambiar canción
-                    radio.CambiarCancion(Radio.getListaR());
+                    radio.CambiarCancion(radio.getListaR());
                     break;
                 case 3: // Elegir canción
-                    radio.EscucharCancion(Radio.getListaR());
+                    radio.EscucharCancion(radio.getListaR());
                     break;
 
             }
@@ -123,7 +123,7 @@ public class Controller {
 
     }
 
-    public static void modoTelefono() {
+    public void modoTelefono() {
         int opcion = 0;
         int selection = 1;
 
@@ -134,12 +134,12 @@ public class Controller {
                 radio.MostrarContactos();
             } else if (selection == 2) {
                 radio.Llamar();
-                while (Radio.isLlamadaactive() == true) {
+                while (radio.isLlamadaactive() == true) {
                     radio.FinalizarLlamada();
                 }
             } else if (selection == 3) {
                 radio.LlamarUltimo();
-                while (Radio.isLlamadaactive() == true) {
+                while (radio.isLlamadaactive() == true) {
                     radio.FinalizarLlamada();
                 }
             } else if (selection == 4) {
@@ -148,7 +148,24 @@ public class Controller {
         }
     }
 
-    public static void modoProductividad() {
+    public void modoProductividad() {
+
+        int opcion = 0;
+        int selection = 1;
+
+        while (opcion != selection) {
+            view.Mostrar("Modo Productividad activo\n¿Desea ver las tarjetas de presentación guardadas?\n1. Si, 2. No");
+            selection = view.notAnOption(2);
+            switch (selection) {
+                case 1: // Mostrar tarjetas
+                    radio.verTarjetas(radio.getTarjetasPresentacion());
+                    break;
+                case 2: // No mostrar tarjetas
+                    view.Mostrar("Regresando al menú inicial...");
+                    break;
+
+            }
+        }
 
     }
 }
