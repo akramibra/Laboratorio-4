@@ -46,7 +46,7 @@ public class Vista {
     public int menuModoRadio() {
         System.out.println(
                 "------------------------------------------------------------------------------------------------------");
-        String[] menuModoRadio = { "Cambiar a FM", "Cambiar emisora", "Guardar emisorias", "Cargas emisoras" };
+        String[] menuModoRadio = { "Cambiar a FM o AM", "Cambiar emisora", "Guardar emisorias", "Cargas emisoras" };
         for (int i = 0; i < menuModoRadio.length; i++) {
             System.out.println((i + 1) + ". " + menuModoRadio[i]);
             System.out.println(
@@ -158,5 +158,14 @@ public class Vista {
         System.out.println("MODO TELEFONO \n ¿Que desea hacer? \n 1 Ver contactos \n 2 Llamar Contactos  ");
         int selection = Integer.parseInt(JOptionPane.showInputDialog("Ingrese una de las opciones"));
         return selection;
+    }
+
+    public int modoRadio(){
+        System.out.println("-------------------------------");
+        String [] modoRadio = {"FM ", "AM", "Regresar al inicio"};
+        for(int i=0; i<modoRadio.length;i++){
+            System.out.println((i+1) + ". " + modoRadio[i]);
+            System.out.println("-------------------------------");
+        }return modoRadio.length;
     }
 }

@@ -57,8 +57,16 @@ public class Controller {
             selection = view.notAnOption(opcion);
             switch (selection) {
                 case 1:
-                    radio.setModoemisora("FM");
-                    System.out.println("Se ha cambiado exitosamente la emisora a FM");
+                    opcion = view.modoRadio();
+                    selection = view.notAnOption(opcion);
+                    if (selection == 1){
+                        radio.setModoemisora("FM");
+                        System.out.println("Se ha cambiado exitosamente la emisora a FM");
+                    }else if(selection == 2){
+                        radio.setModoemisora("AM");
+                        System.out.println("Se ha cambiado exitosamente la emisoar a AM");
+                    }
+                    
                     break;
                 case 2:
                     int option = Integer.parseInt(JOptionPane.showInputDialog(null, "1. Para adelante \n2. Para Atras"));
