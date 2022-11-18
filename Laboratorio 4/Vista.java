@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 public class Vista {
 
@@ -121,4 +122,41 @@ public class Vista {
         System.out.println(texto);
     }
 
+    public void MostarContactos(ArrayList<String> i){
+        for (String string: i){
+            System.out.println("- " + string);
+        }
+    }
+
+    public String Llamar(ArrayList<String> i){
+        System.out.println("¿A quien desea llamar?");
+        int inde = 0;
+        for (String string: i){
+            System.out.println(inde + string);
+            inde++;
+        }
+        int selection = Integer.parseInt(JOptionPane.showInputDialog("Ingrese una de las opciones"));
+        System.out.println("Llamando a " + i.get(selection));
+        return i.get(selection);
+    }
+
+    public int finalizarcall(String n){
+        System.out.println("¿Desea finalizar la llamada con " + n + "? \n 1 SI \n 2 NO" );
+        int selection = Integer.parseInt(JOptionPane.showInputDialog("Ingrese una de las opciones"));
+        return selection;
+    }
+
+    public void telconected(){
+        System.out.println("Telefono conectado correctamente");
+    }
+
+    public void lastcontactcall(String n){
+        System.out.println("Llamando a " + n);
+    }
+
+    public int menumodotel(){
+        System.out.println("MODO TELEFONO \n ¿Que desea hacer? \n 1 Ver contactos \n 2 Llamar Contactos  ");
+        int selection = Integer.parseInt(JOptionPane.showInputDialog("Ingrese una de las opciones"));
+        return selection;
+    }
 }

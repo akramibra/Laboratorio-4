@@ -4,7 +4,9 @@
  */
 import java.util.ArrayList;
 
-public class Radio {
+import javax.swing.text.View;
+
+public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono{
     private static boolean encendido;
     private static int volumen;
     private static int modo;
@@ -15,6 +17,9 @@ public class Radio {
     private static ArrayList<String> Contactos;
     private static String LastContact;
     private ArrayList<String> listas_de_Reproduccion;
+    private static boolean telconectado;
+    private static boolean llamadaactive;
+    Vista view = new Vista();
 
     Radio() {
         encendido = false;
@@ -27,6 +32,7 @@ public class Radio {
         Contactos = new ArrayList<>();
         crearContacts();
         crearListas();
+        telconectado = false;
     }
 
     public void crearCanciones() {
@@ -137,5 +143,95 @@ public class Radio {
 
     public void setListas_de_Reproduccion(ArrayList<String> listas_de_Reproduccion) {
         this.listas_de_Reproduccion = listas_de_Reproduccion;
+    }
+
+    public static boolean isTelconectado() {
+        return telconectado;
+    }
+
+    public static void setTelconectado(boolean telconectado) {
+        Radio.telconectado = telconectado;
+    }
+
+    public static boolean isLlamadaactive() {
+        return llamadaactive;
+    }
+
+    public static void setLlamadaactive(boolean llamadaactive) {
+        Radio.llamadaactive = llamadaactive;
+    }
+//MODO TELEFONO
+    @Override
+    public void Conectar() {
+        telconectado = true;
+        view.telconected();
+    }
+
+    @Override
+    public void MostrarContactos() {
+        view.MostarContactos(Contactos);      
+    }
+
+    @Override
+    public void Llamar() {
+        LastContact = view.Llamar(Contactos);
+        llamadaactive = true;     
+    }
+
+    @Override
+    public void FinalizarLlamada() {
+        int selec = view.finalizarcall(LastContact);
+        if (selec == 1){
+            llamadaactive = false;
+        }
+        else if (selec == 2){
+            llamadaactive = true;
+        }
+    }
+
+    @Override
+    public void LlamarUltimo() {
+        view.lastcontactcall(LastContact);
+        llamadaactive = true; 
+    }
+//MODO REPRODUCTOR
+    @Override
+    public void SeleccionarLista(ArrayList<String> listas) {    
+    }
+
+    @Override
+    public void CambiarCancion(ArrayList<Cancion> canciones) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void EscucharCancion(ArrayList<Cancion> canciones) {
+        // TODO Auto-generated method stub
+        
+    }
+//MODO RADIO
+    @Override
+    public void CambiarTipo() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void CambiarEmisora() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void GuardarEmisora() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void CargarEmisora() {
+        // TODO Auto-generated method stub
+        
     }
 }

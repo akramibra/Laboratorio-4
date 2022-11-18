@@ -92,18 +92,24 @@ public class Controller {
     public static void modoTelefono() {
         int opcion = 0;
         int selection = 1;
+
         while (opcion != selection) {
-            opcion = view.menuTelefono();
+            opcion = view.menumodotel();
             selection = view.notAnOption(opcion);
             switch (selection) {
                 case 1:
-                    break;
+                    radio.MostrarContactos();
                 case 2:
-                    break;
+                    radio.Llamar();
+                    while(radio.isLlamadaactive() == true){
+                        radio.FinalizarLlamada();
+                    }
                 case 3:
-                    break;
-                case 4:
-                    break;
+                    radio.LlamarUltimo();
+                    while(radio.isLlamadaactive() == true){
+                        radio.FinalizarLlamada();
+                    }
+                
 
             }
         }
