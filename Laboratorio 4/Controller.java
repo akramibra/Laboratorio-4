@@ -120,21 +120,23 @@ public class Controller {
         while (opcion != selection) {
             opcion = view.menumodotel();
             selection = view.notAnOption(opcion);
-            switch (selection) {
-                case 1:
-                    radio.MostrarContactos();
-                case 2:
-                    radio.Llamar();
-                    while(radio.isLlamadaactive() == true){
-                        radio.FinalizarLlamada();
-                    }
-                case 3:
-                    radio.LlamarUltimo();
-                    while(radio.isLlamadaactive() == true){
-                        radio.FinalizarLlamada();
-                    }
-                
-
+            if (selection == 1){
+                radio.MostrarContactos();
+            }
+            else if (selection == 2){ 
+                radio.Llamar();
+                while(radio.isLlamadaactive() == true){
+                    radio.FinalizarLlamada();
+                }
+            }
+            else if (selection == 3){ 
+                radio.LlamarUltimo();
+                while(radio.isLlamadaactive() == true){
+                    radio.FinalizarLlamada();
+                }
+            }
+            else if (selection == 4){
+                break;
             }
         }
     }

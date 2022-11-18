@@ -155,7 +155,7 @@ public class Vista {
     }
 
     public int menumodotel(){
-        System.out.println("MODO TELEFONO \n ¿Que desea hacer? \n 1 Ver contactos \n 2 Llamar Contactos  ");
+        System.out.println("MODO TELEFONO \n ¿Que desea hacer? \n 1 Ver contactos \n 2 Llamar Contactos \n 3 Llamar Ultimo Contacto ");
         int selection = Integer.parseInt(JOptionPane.showInputDialog("Ingrese una de las opciones"));
         return selection;
     }
