@@ -1,5 +1,7 @@
+import javax.swing.JOptionPane;
 
 public class Controller {
+    private static boolean NumberFormatException = false;
     private static Vista view = new Vista();
     private static Radio radio = new Radio();
 
@@ -59,10 +61,32 @@ public class Controller {
                     System.out.println("Se ha cambiado exitosamente la emisora a FM");
                     break;
                 case 2:
+                    int option = Integer.parseInt(JOptionPane.showInputDialog(null, "1. Para adelante \n2. Para Atras"));
+                    if (option == 1){
+                        float iEmisora = radio.getiEmisora() + (float) 0.5;
+                        radio.setiEmisora(iEmisora);
+                        System.out.println("Usted esta actualmente en la emisora " + iEmisora);
+                        
+                    }else if(option ==2){
+                        float iEmisora = radio.getiEmisora() - (float)0.5;
+                        radio.setiEmisora(iEmisora);
+                        System.out.println("Usted esta actualmente en la emisora " + iEmisora);
+                    }
                     break;
                 case 3:
+                    float gEmisoria = Float.parseFloat(JOptionPane.showInputDialog(null, "Que emisora desea guardar"));
+                    if(gEmisoria >0){
+                        radio.getEmisorasG().add(gEmisoria);
+                        System.out.println(radio.getEmisorasG());
+                    }else if(gEmisoria<0){
+                        System.out.println("No se pueden numeros negativos");
+                    }else if(NumberFormatException == true){
+                        System.out.println("Ingrese un numero porfavor");
+                    }
+                    
                     break;
                 case 4:
+                    
                     break;
             }
         }

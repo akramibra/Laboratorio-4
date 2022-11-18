@@ -19,9 +19,19 @@ public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono{
     private ArrayList<String> listas_de_Reproduccion;
     private static boolean telconectado;
     private static boolean llamadaactive;
+    private static float iEmisora;
+    public static float getiEmisora() {
+        return iEmisora;
+    }
+
+    public static void setiEmisora(float iEmisora) {
+        Radio.iEmisora = iEmisora;
+    }
+
     Vista view = new Vista();
 
     Radio() {
+        iEmisora = (float) 90.0;
         encendido = false;
         volumen = 0;
         modo = 0;
