@@ -1,4 +1,3 @@
-import javax.swing.JOptionPane;
 
 public class Controller {
     private static boolean NumberFormatException = false;
@@ -59,42 +58,42 @@ public class Controller {
                 case 1:
                     opcion = view.modoRadio();
                     selection = view.notAnOption(opcion);
-                    if (selection == 1){
+                    if (selection == 1) {
                         radio.setModoemisora("FM");
                         System.out.println("Se ha cambiado exitosamente la emisora a FM");
-                    }else if(selection == 2){
+                    } else if (selection == 2) {
                         radio.setModoemisora("AM");
-                        System.out.println("Se ha cambiado exitosamente la emisoar a AM");
+                        view.Mostrar("Se ha cambiado exitosamente la emisoar a AM");
                     }
-                    
+
                     break;
                 case 2:
-                    int option = Integer.parseInt(JOptionPane.showInputDialog(null, "1. Para adelante \n2. Para Atras"));
-                    if (option == 1){
-                        float iEmisora = radio.getiEmisora() + (float) 0.5;
-                        radio.setiEmisora(iEmisora);
+                    int option = view.SolicitudInt("1. Para adelante \n2. Para Atras");
+                    if (option == 1) {
+                        float iEmisora = Radio.getiEmisora() + (float) 0.5;
+                        Radio.setiEmisora(iEmisora);
                         System.out.println("Usted esta actualmente en la emisora " + iEmisora);
-                        
-                    }else if(option ==2){
-                        float iEmisora = radio.getiEmisora() - (float)0.5;
-                        radio.setiEmisora(iEmisora);
+
+                    } else if (option == 2) {
+                        float iEmisora = Radio.getiEmisora() - (float) 0.5;
+                        Radio.setiEmisora(iEmisora);
                         System.out.println("Usted esta actualmente en la emisora " + iEmisora);
                     }
                     break;
                 case 3:
-                    float gEmisoria = Float.parseFloat(JOptionPane.showInputDialog(null, "Que emisora desea guardar"));
-                    if(gEmisoria >0){
-                        radio.getEmisorasG().add(gEmisoria);
-                        System.out.println(radio.getEmisorasG());
-                    }else if(gEmisoria<0){
+                    float gEmisoria = view.SolicitudFloat("Que emisora desea guardar");
+                    if (gEmisoria > 0) {
+                        Radio.getEmisorasG().add(gEmisoria);
+                        System.out.println(Radio.getEmisorasG());
+                    } else if (gEmisoria < 0) {
                         System.out.println("No se pueden numeros negativos");
-                    }else if(NumberFormatException == true){
+                    } else if (NumberFormatException == true) {
                         System.out.println("Ingrese un numero porfavor");
                     }
-                    
+
                     break;
                 case 4:
-                    
+
                     break;
             }
         }
@@ -110,10 +109,13 @@ public class Controller {
             selection = view.notAnOption(opcion);
             switch (selection) {
                 case 1: // Seleccionar lista
-
+                    radio.SeleccionarLista(radio.getListas_de_Reproduccion());
+                    break;
                 case 2: // Cambiar canción
+                    radio.CambiarCancion(Radio.getListaR());
                     break;
                 case 3: // Elegir canción
+                    radio.EscucharCancion(Radio.getListaR());
                     break;
 
             }
@@ -128,22 +130,19 @@ public class Controller {
         while (opcion != selection) {
             opcion = view.menumodotel();
             selection = view.notAnOption(opcion);
-            if (selection == 1){
+            if (selection == 1) {
                 radio.MostrarContactos();
-            }
-            else if (selection == 2){ 
+            } else if (selection == 2) {
                 radio.Llamar();
-                while(radio.isLlamadaactive() == true){
+                while (Radio.isLlamadaactive() == true) {
                     radio.FinalizarLlamada();
                 }
-            }
-            else if (selection == 3){ 
+            } else if (selection == 3) {
                 radio.LlamarUltimo();
-                while(radio.isLlamadaactive() == true){
+                while (Radio.isLlamadaactive() == true) {
                     radio.FinalizarLlamada();
                 }
-            }
-            else if (selection == 4){
+            } else if (selection == 4) {
                 break;
             }
         }

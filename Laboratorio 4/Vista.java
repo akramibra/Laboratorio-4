@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 public class Vista {
 
@@ -122,16 +121,16 @@ public class Vista {
         System.out.println(texto);
     }
 
-    public void MostarContactos(ArrayList<String> i){
-        for (String string: i){
+    public void MostarContactos(ArrayList<String> i) {
+        for (String string : i) {
             System.out.println("- " + string);
         }
     }
 
-    public String Llamar(ArrayList<String> i){
+    public String Llamar(ArrayList<String> i) {
         System.out.println("¿A quien desea llamar?");
         int inde = 0;
-        for (String string: i){
+        for (String string : i) {
             System.out.println(inde + string);
             inde++;
         }
@@ -140,32 +139,44 @@ public class Vista {
         return i.get(selection);
     }
 
-    public int finalizarcall(String n){
-        System.out.println("¿Desea finalizar la llamada con " + n + "? \n 1 SI \n 2 NO" );
+    public int finalizarcall(String n) {
+        System.out.println("¿Desea finalizar la llamada con " + n + "? \n 1 SI \n 2 NO");
         int selection = Integer.parseInt(JOptionPane.showInputDialog("Ingrese una de las opciones"));
         return selection;
     }
 
-    public void telconected(){
+    public void telconected() {
         System.out.println("Telefono conectado correctamente");
     }
 
-    public void lastcontactcall(String n){
+    public void lastcontactcall(String n) {
         System.out.println("Llamando a " + n);
     }
 
-    public int menumodotel(){
-        System.out.println("MODO TELEFONO \n ¿Que desea hacer? \n 1 Ver contactos \n 2 Llamar Contactos \n 3 Llamar Ultimo Contacto ");
+    public int menumodotel() {
+        System.out.println(
+                "MODO TELEFONO \n ¿Que desea hacer? \n 1 Ver contactos \n 2 Llamar Contactos \n 3 Llamar Ultimo Contacto ");
         int selection = Integer.parseInt(JOptionPane.showInputDialog("Ingrese una de las opciones"));
         return selection;
     }
 
-    public int modoRadio(){
+    public int modoRadio() {
         System.out.println("-------------------------------");
-        String [] modoRadio = {"FM ", "AM", "Regresar al inicio"};
-        for(int i=0; i<modoRadio.length;i++){
-            System.out.println((i+1) + ". " + modoRadio[i]);
+        String[] modoRadio = { "FM ", "AM", "Regresar al inicio" };
+        for (int i = 0; i < modoRadio.length; i++) {
+            System.out.println((i + 1) + ". " + modoRadio[i]);
             System.out.println("-------------------------------");
-        }return modoRadio.length;
+        }
+        return modoRadio.length;
+    }
+
+    public int SolicitudInt(String texto) {
+        int resp = Integer.parseInt(JOptionPane.showInputDialog(null, texto));
+        return resp;
+    }
+
+    public float SolicitudFloat(String texto) {
+        float resp = Float.parseFloat(JOptionPane.showInputDialog(null, texto));
+        return resp;
     }
 }

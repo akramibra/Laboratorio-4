@@ -4,9 +4,7 @@
  */
 import java.util.ArrayList;
 
-import javax.swing.text.View;
-
-public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono{
+public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono, ImodoProductividad {
     private static boolean encendido;
     private static int volumen;
     private static int modo;
@@ -20,6 +18,7 @@ public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono{
     private static boolean telconectado;
     private static boolean llamadaactive;
     private static float iEmisora;
+
     public static float getiEmisora() {
         return iEmisora;
     }
@@ -103,7 +102,7 @@ public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono{
         return modoemisora;
     }
 
-    public static void setModoemisora(String modoemisora) {
+    public void setModoemisora(String modoemisora) {
         Radio.modoemisora = modoemisora;
     }
 
@@ -170,7 +169,8 @@ public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono{
     public static void setLlamadaactive(boolean llamadaactive) {
         Radio.llamadaactive = llamadaactive;
     }
-//MODO TELEFONO
+
+    // MODO TELEFONO
     @Override
     public void Conectar() {
         telconectado = true;
@@ -179,22 +179,21 @@ public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono{
 
     @Override
     public void MostrarContactos() {
-        view.MostarContactos(Contactos);      
+        view.MostarContactos(Contactos);
     }
 
     @Override
     public void Llamar() {
         LastContact = view.Llamar(Contactos);
-        llamadaactive = true;     
+        llamadaactive = true;
     }
 
     @Override
     public void FinalizarLlamada() {
         int selec = view.finalizarcall(LastContact);
-        if (selec == 1){
+        if (selec == 1) {
             llamadaactive = false;
-        }
-        else if (selec == 2){
+        } else if (selec == 2) {
             llamadaactive = true;
         }
     }
@@ -202,46 +201,110 @@ public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono{
     @Override
     public void LlamarUltimo() {
         view.lastcontactcall(LastContact);
-        llamadaactive = true; 
+        llamadaactive = true;
     }
-//MODO REPRODUCTOR
+
+    // MODO REPRODUCTOR
     @Override
-    public void SeleccionarLista(ArrayList<String> listas) {    
+    public void SeleccionarLista(ArrayList<String> listas) {
+        int lista_seleccionada = 0;
+        String lista = "";
+        int opcion = 0;
+        int selection = 1;
+
+        while (opcion != selection) {
+            opcion = view.mostrarListas(listas);
+            selection = view.notAnOption(opcion);
+        }
+
+        lista_seleccionada = selection;
+        switch (lista_seleccionada) {
+            case 1:
+                lista = "Pop latino";
+            case 2:
+                lista = "Urbano";
+            case 3:
+                lista = "Oldies";
+            default:
+                break;
+        }
+
+        view.Mostrar("Se ha seleccionado la lista " + lista);
     }
 
     @Override
     public void CambiarCancion(ArrayList<Cancion> canciones) {
-        // TODO Auto-generated method stub
-        
+        int opcion = 0;
+        int selection = 1;
+
+        if (canciones == null) {
+            System.out.println("No hay canciones en la lista");
+        } else {
+            for (int j = 0; j < canciones.size(); j++) {
+                System.out.println(canciones.get(j));
+
+                while (opcion != selection) {
+                    view.Mostrar("anterior 1, siguiente 2");
+                    selection = view.notAnOption(2);
+                }
+
+                if (selection == 1) {
+                    if (j != 0) {
+                        j -= 2;
+                    } else {
+                        System.out.println("esa es la primera canción en lista");
+                    }
+                }
+            }
+        }
+
     }
 
     @Override
     public void EscucharCancion(ArrayList<Cancion> canciones) {
-        // TODO Auto-generated method stub
-        
+        int lista_seleccionada = 0;
+        String lista = "";
+        ArrayList<Cancion> enLista = new ArrayList<Cancion>();
+        int opcion = 0;
+        int selection = 1;
+
+        while (opcion != selection) {
+            enLista = view.mostrarCanciones(canciones, lista_seleccionada, lista);
+            opcion = enLista.size();
+            selection = view.notAnOption(opcion);
+            System.out.println("hey");
+        }
+
     }
-//MODO RADIO
+
+    // MODO RADIO
     @Override
     public void CambiarTipo() {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void CambiarEmisora() {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void GuardarEmisora() {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void CargarEmisora() {
         // TODO Auto-generated method stub
-        
+
+    }
+
+    // MODO PRODUCTIVIDAD
+    @Override
+    public void verTarjetas(ArrayList<String> tarjetas) {
+
     }
 }
