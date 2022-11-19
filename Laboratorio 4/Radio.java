@@ -1,4 +1,4 @@
-
+    
 /**
  * Radio
  */
@@ -203,17 +203,23 @@ public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono, Imodo
         int opcion = 0;
         int selection = 1;
         while (opcion != selection) {
-            int option = view.SolicitudInt("1. Para adelante \n2. Para Atras");
-            if (option == 1) {
-                float iEmisora = getiEmisora() + (float) 0.5;
-                setiEmisora(iEmisora);
-                view.Mostrar("Usted esta actualmente en la emisora " + iEmisora);
-
-            } else if (option == 2) {
-                float iEmisora = getiEmisora() - (float) 0.5;
-                setiEmisora(iEmisora);
-                view.Mostrar("Usted esta actualmente en la emisora " + iEmisora);
+            opcion = view.cambiarE();
+            selection = view.notAnOption(opcion);
+            //int option = view.SolicitudInt("1. Para adelante \n2. Para Atras\n3. Regresar");
+            switch(selection){
+                case 1:
+                    float iEmisora = getiEmisora() + (float) 0.5;
+                    setiEmisora(iEmisora); 
+                    view.Mostrar("Usted esta actualmente en la emisora " + iEmisora);
+                    break;
+                
+                case 2:
+                    float Emisora = getiEmisora() - (float) 0.5;
+                    setiEmisora(Emisora);
+                    view.Mostrar("Usted esta actualmente en la emisora " + Emisora);
+                    break;
             }
+          
         }
 
     }

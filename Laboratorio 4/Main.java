@@ -1,9 +1,8 @@
 
 public class Main {
-    private static Controller controller = new Controller();
+   private static Controller controller = new Controller();
 
-    public void main(String[] args) {
-
+    public static void main(String[] args) {
         controller.startRadio();
 
     }

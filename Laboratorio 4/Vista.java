@@ -185,7 +185,16 @@ public class Vista {
 
     public void imprimirFloats(ArrayList<Float> num) {
         for (Float float1 : num) {
-            System.out.println(float1);
+            System.out.println("["+float1+"]");
         }
+    }
+
+    public int cambiarE(){
+        System.out.println("----------------------------------------");
+        String[] cambiarE = {"Para adelante" , "Para atras", "Regresar al inicio"};
+        for(int i =0; i<cambiarE.length;i++){
+            System.out.println((i+1) + ". " + cambiarE[i]);
+            System.out.println("----------------------------------------");
+        }return cambiarE.length;
     }
 }
