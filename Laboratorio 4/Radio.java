@@ -1,4 +1,4 @@
-    
+
 /**
  * Radio
  */
@@ -173,9 +173,13 @@ public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono, Imodo
         int selection = 1;
 
         while (opcion != selection) {
-            enLista = view.mostrarCanciones(canciones, lista_seleccionada, lista);
-            opcion = enLista.size();
-            selection = view.notAnOption(opcion);
+            if (lista_seleccionada == 0) {
+                System.out.println("No se ha seleccionado una lista de reproducción");
+            } else {
+                enLista = view.mostrarCanciones(canciones, lista_seleccionada, lista);
+                opcion = enLista.size();
+                selection = view.notAnOption(opcion);
+            }
         }
 
     }
@@ -205,21 +209,22 @@ public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono, Imodo
         while (opcion != selection) {
             opcion = view.cambiarE();
             selection = view.notAnOption(opcion);
-            //int option = view.SolicitudInt("1. Para adelante \n2. Para Atras\n3. Regresar");
-            switch(selection){
+            // int option = view.SolicitudInt("1. Para adelante \n2. Para Atras\n3.
+            // Regresar");
+            switch (selection) {
                 case 1:
                     float iEmisora = getiEmisora() + (float) 0.5;
-                    setiEmisora(iEmisora); 
+                    setiEmisora(iEmisora);
                     view.Mostrar("Usted esta actualmente en la emisora " + iEmisora);
                     break;
-                
+
                 case 2:
                     float Emisora = getiEmisora() - (float) 0.5;
                     setiEmisora(Emisora);
                     view.Mostrar("Usted esta actualmente en la emisora " + Emisora);
                     break;
             }
-          
+
         }
 
     }
