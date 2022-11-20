@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 /**
  * ImodoReproductor
+ * Interfaz que da un formato para el modo reproductor del programa.
  */
 public interface ImodoReproductor {
     /**

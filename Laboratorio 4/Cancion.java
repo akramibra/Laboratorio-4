@@ -8,6 +8,16 @@ public class Cancion {
     private String genero;
     private int enlista;
 
+    /**
+     * Establece valores iniciales para la instancia creada
+     * Cada parametro es el dato que sustituye al valor del atributo correspondiente
+     * 
+     * @param nombre
+     * @param duracion
+     * @param autor
+     * @param genero
+     * @param enlista
+     */
     public Cancion(String nombre, String duracion, String autor, String genero, int enlista) {
         this.nombre = nombre;
         this.duracion = duracion;
@@ -22,6 +32,13 @@ public class Cancion {
                 + " minutos.";
     }
 
+    /**
+     * Getters y setters de cada atributo, permite a otras clases acceder a esas
+     * variables
+     * 
+     * @return el dato guardado en la variable de la clase
+     * @param datos que se desean registrar en las variables
+     */
     public String getNombre() {
         return nombre;
     }

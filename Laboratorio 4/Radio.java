@@ -1,6 +1,7 @@
 
 /**
  * Radio
+ * Implementa las distintas interfaces y da funcionalidad a sus métodos. Permite que cada modo en radio tenga funciones útiles
  */
 import java.util.ArrayList;
 
@@ -20,8 +21,10 @@ public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono, Imodo
     private float iEmisora;
     private ArrayList<String> tarjetasPresentacion;
     private Vista view = new Vista();
+    private int lista_seleccionada;
+    private String lista;
 
-    Radio() {
+    Radio() { // Establece valores iniciales a los atributos de la clase
         iEmisora = (float) 90.0;
         encendido = false;
         volumen = 0;
@@ -35,8 +38,13 @@ public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono, Imodo
         crearListas();
         telconectado = false;
         tarjetasPresentacion = new ArrayList<String>();
+        lista_seleccionada = 0;
+        lista = "";
     }
 
+    /**
+     * Crea nuevas canciones para añadir a la lista
+     */
     public void crearCanciones() {
         Cancion cancion1 = new Cancion("La forma en que me miras", "5:07", "Super Yei, Myke Towers, Lenny Tavárez",
                 "Pop Latino", 1);
@@ -52,6 +60,9 @@ public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono, Imodo
 
     }
 
+    /**
+     * Crea nuevos contactos para añadir a la lista en atributos
+     */
     public void crearContacts() {
         Contactos.add("Diego");
         Contactos.add("Fabiola");
@@ -60,6 +71,10 @@ public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono, Imodo
         Contactos.add("Dominos Pizza");
     }
 
+    /**
+     * Crea nuevas listas de reproducción para añadir a la lista de ellas en
+     * atributos
+     */
     public void crearListas() {
         listas_de_Reproduccion = new ArrayList<String>();
         listas_de_Reproduccion.add("Pop Latino");
@@ -67,6 +82,10 @@ public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono, Imodo
         listas_de_Reproduccion.add("Oldies");
     }
 
+    /**
+     * Crea nuevas tarjetas de contactos para añadir a la lista de ellas en
+     * atributos
+     */
     public void crearTarjetas() {
         tarjetasPresentacion.add("\tFabiola Contreras\ntel:22308599\temail:con22787@uvg.edu.gt");
         tarjetasPresentacion.add("\tDiego Duarte\ntel:22678430\temail:dua22075@uvg.edu.gt");
@@ -110,8 +129,6 @@ public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono, Imodo
     // MODO REPRODUCTOR
     @Override
     public void SeleccionarLista(ArrayList<String> listas) {
-        int lista_seleccionada = 0;
-        String lista = "";
         int opcion = 0;
         int selection = 1;
 
@@ -120,14 +137,14 @@ public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono, Imodo
             selection = view.notAnOption(opcion);
         }
 
-        lista_seleccionada = selection;
-        switch (lista_seleccionada) {
+        this.lista_seleccionada = selection;
+        switch (this.lista_seleccionada) {
             case 1:
-                lista = "Pop latino";
+                this.lista = "Pop latino";
             case 2:
-                lista = "Urbano";
+                this.lista = "Urbano";
             case 3:
-                lista = "Oldies";
+                this.lista = "Oldies";
             default:
                 break;
         }
@@ -166,14 +183,12 @@ public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono, Imodo
 
     @Override
     public void EscucharCancion(ArrayList<Cancion> canciones) {
-        int lista_seleccionada = 0;
-        String lista = "";
         ArrayList<Cancion> enLista = new ArrayList<Cancion>();
         int opcion = 0;
         int selection = 1;
 
         while (opcion != selection) {
-            if (lista_seleccionada == 0) {
+            if (this.lista_seleccionada == 0) {
                 System.out.println("No se ha seleccionado una lista de reproducción");
             } else {
                 enLista = view.mostrarCanciones(canciones, lista_seleccionada, lista);
@@ -266,6 +281,7 @@ public class Radio implements ImodoRadio, ImodoReproductor, ImodoTelefono, Imodo
     /**
      * 
      * Getters y setters para cada una de las variables disponibles
+     * Permite a otras clases acceder a los valores guardados en radio
      * 
      */
     public boolean isEncendido() {
